@@ -1,0 +1,26 @@
+---
+import ReadingLayout from '../layouts/ReadingLayout.astro';
+import { getNovels } from '../lib/novels';
+
+const novels = await getNovels();
+---
+
+<ReadingLayout title="Asodhra" description="Novels and lore from the world of Asodhra.">
+	<h1>Asodhra</h1>
+	<p class="muted">Novels and lore from the world of Asodhra.</p>
+
+	<h2 id="novels">Novels</h2>
+	<ul>
+		{
+			novels.map((novel) => (
+				<li>
+					<a href={`/novels/${novel.id}/`}>{novel.data.title}</a>
+					<span class="muted"> — {novel.data.description}</span>
+				</li>
+			))
+		}
+	</ul>
+
+	<h2>Lore</h2>
+	<p><a href="/lore/">Explore the world</a>: its people, places and history.</p>
+</ReadingLayout>
