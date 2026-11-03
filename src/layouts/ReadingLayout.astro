@@ -1,0 +1,110 @@
+---
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description } = Astro.props;
+const pageTitle = title === 'Asodhra' ? title : `${title} | Asodhra`;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{pageTitle}</title>
+		{description && <meta name="description" content={description} />}
+	</head>
+	<body>
+		<header>
+			<a class="site-title" href="/">Asodhra</a>
+			<nav>
+				<a href="/#novels">Novels</a>
+				<a href="/lore/">Lore</a>
+			</nav>
+		</header>
+		<main>
+			<slot />
+		</main>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--bg: #fbf8f3;
+		--text: #2b2622;
+		--muted: #6f665d;
+		--accent: #8a4b2a;
+		--rule: #e4ddd3;
+		color-scheme: light dark;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--bg: #1a1816;
+			--text: #e8e2da;
+			--muted: #a39a90;
+			--accent: #d99a6c;
+			--rule: #36312c;
+		}
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	body {
+		margin: 0;
+		background: var(--bg);
+		color: var(--text);
+		font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
+		font-size: 1.15rem;
+		line-height: 1.7;
+	}
+
+	a {
+		color: var(--accent);
+	}
+
+	header {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem 1.5rem;
+		align-items: baseline;
+		justify-content: space-between;
+		max-width: 40rem;
+		margin: 0 auto;
+		padding: 1.25rem 1rem;
+		border-bottom: 1px solid var(--rule);
+		font-family: system-ui, sans-serif;
+		font-size: 1rem;
+	}
+
+	header nav {
+		display: flex;
+		gap: 1.25rem;
+	}
+
+	.site-title {
+		font-weight: 600;
+		color: var(--text);
+		text-decoration: none;
+	}
+
+	main {
+		max-width: 40rem;
+		margin: 0 auto;
+		padding: 2rem 1rem 4rem;
+	}
+
+	h1,
+	h2 {
+		line-height: 1.25;
+	}
+
+	.muted {
+		color: var(--muted);
+	}
+</style>
