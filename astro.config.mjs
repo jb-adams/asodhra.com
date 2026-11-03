@@ -8,7 +8,6 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Asodhra',
-			logo: { light: './src/assets/logo-light.svg', dark: './src/assets/logo-dark.svg' },
 			customCss: [
 				'@fontsource-variable/cinzel',
 				'@fontsource-variable/literata/opsz.css',

@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import { getNovels, romanNumeral } from '../lib/novels';
 
@@ -19,7 +20,7 @@ const [firstNovel] = novels;
 				...(firstNovel
 					? [{ text: `Start reading ${firstNovel.data.title}`, link: `/novels/${firstNovel.id}/`, icon: 'right-arrow' as const }]
 					: []),
-				{ text: 'Explore the lore', link: '/lore/', variant: 'minimal' as const },
+				{ text: 'Explore the lore', link: '/lore/', attrs: { class: 'asodhra-sorkarian-button' } },
 			],
 		},
 	}}
@@ -30,9 +31,15 @@ const [firstNovel] = novels;
 		<div class="asodhra-book-grid">
 			{
 				novels.map((novel) => (
-					<a class="asodhra-book" href={`/novels/${novel.id}/`}>
+					<a class="asodhra-book" data-glow={novel.data.palette} href={`/novels/${novel.id}/`}>
+						{novel.data.cover ? (
+							<Image class="asodhra-book-cover" src={novel.data.cover} alt={novel.data.title} widths={[256, 512]} sizes="16rem" />
+						) : (
+							<span class="asodhra-book-cover asodhra-cover-placeholder">
+								<span class="asodhra-book-title">{novel.data.title}</span>
+							</span>
+						)}
 						<span class="asodhra-book-number">Book {romanNumeral(novel.data.book)}</span>
-						<span class="asodhra-book-title">{novel.data.title}</span>
 						<span class="asodhra-book-description">{novel.data.description}</span>
 					</a>
 				))

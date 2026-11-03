@@ -1,5 +1,6 @@
 ---
 import type { GetStaticPaths } from 'astro';
+import { Image, getImage } from 'astro:assets';
 import { render } from 'astro:content';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import { chapterSlug, getChapters, getNovels, romanNumeral } from '../../../lib/novels';
@@ -10,14 +11,23 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { novel } = Astro.props;
+const { cover, palette } = novel.data;
 const chapters = await getChapters(novel.id);
 const { Content } = await render(novel);
+// A small copy of the cover, blurred by CSS into a wash of color behind the title.
+const backdrop = cover && (await getImage({ src: cover, width: 160, format: 'webp' }));
 ---
 
 <StarlightPage frontmatter={{ title: novel.data.title, description: novel.data.description, template: 'splash' }}>
-	<div class="asodhra-reading">
+	<div class="asodhra-reading" data-palette={palette}>
+		{backdrop && <div class="asodhra-backdrop" style={`--asodhra-backdrop: url(${backdrop.src})`} aria-hidden="true" />}
 		<p class="asodhra-eyebrow">The Dream Stalker Trilogy · Book {romanNumeral(novel.data.book)}</p>
-		<Content />
+		<div class="asodhra-novel-intro">
+			{cover && <Image class="asodhra-novel-cover" src={cover} alt={`Cover of ${novel.data.title}`} widths={[176, 352]} sizes="11rem" />}
+			<div>
+				<Content />
+			</div>
+		</div>
 
 		<h2>Chapters</h2>
 		{
