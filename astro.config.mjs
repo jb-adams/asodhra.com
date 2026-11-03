@@ -8,6 +8,16 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Asodhra',
+			logo: { light: './src/assets/logo-light.svg', dark: './src/assets/logo-dark.svg' },
+			customCss: [
+				'@fontsource-variable/cinzel',
+				'@fontsource-variable/literata/opsz.css',
+				'@fontsource-variable/literata/opsz-italic.css',
+				'./src/styles/theme.css',
+			],
+			components: {
+				SiteTitle: './src/components/SiteTitle.astro',
+			},
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/jb-adams/asodhra.com' }],
 			sidebar: [
 				{

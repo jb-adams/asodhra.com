@@ -1,26 +1,42 @@
 ---
-import ReadingLayout from '../layouts/ReadingLayout.astro';
-import { getNovels } from '../lib/novels';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { getNovels, romanNumeral } from '../lib/novels';
 
 const novels = await getNovels();
+const [firstNovel] = novels;
 ---
 
-<ReadingLayout title="Asodhra" description="Novels and lore from the world of Asodhra.">
-	<h1>Asodhra</h1>
-	<p class="muted">Novels and lore from the world of Asodhra.</p>
-
-	<h2 id="novels">Novels</h2>
-	<ul>
-		{
-			novels.map((novel) => (
-				<li>
-					<a href={`/novels/${novel.id}/`}>{novel.data.title}</a>
-					<span class="muted"> — {novel.data.description}</span>
-				</li>
-			))
-		}
-	</ul>
-
-	<h2>Lore</h2>
-	<p><a href="/lore/">Explore the world</a>: its people, places and history.</p>
-</ReadingLayout>
+<StarlightPage
+	frontmatter={{
+		title: 'Asodhra',
+		description: 'The world of the Dream Stalker Trilogy by Jeremy Bruce Adams.',
+		template: 'splash',
+		pagefind: false,
+		hero: {
+			tagline: 'The world of the Dream Stalker Trilogy, where ancient powers feed on souls through dreams.',
+			image: { html: '<div class="asodhra-eye" aria-hidden="true"></div>' },
+			actions: [
+				...(firstNovel
+					? [{ text: `Start reading ${firstNovel.data.title}`, link: `/novels/${firstNovel.id}/`, icon: 'right-arrow' as const }]
+					: []),
+				{ text: 'Explore the lore', link: '/lore/', variant: 'minimal' as const },
+			],
+		},
+	}}
+>
+	<section id="books" class="asodhra-books not-content">
+		<h2 class="asodhra-flourish">The Dream Stalker Trilogy</h2>
+		<p class="asodhra-eyebrow">by Jeremy Bruce Adams</p>
+		<div class="asodhra-book-grid">
+			{
+				novels.map((novel) => (
+					<a class="asodhra-book" href={`/novels/${novel.id}/`}>
+						<span class="asodhra-book-number">Book {romanNumeral(novel.data.book)}</span>
+						<span class="asodhra-book-title">{novel.data.title}</span>
+						<span class="asodhra-book-description">{novel.data.description}</span>
+					</a>
+				))
+			}
+		</div>
+	</section>
+</StarlightPage>

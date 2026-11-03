@@ -1,7 +1,7 @@
 ---
 import type { GetStaticPaths } from 'astro';
 import { getCollection, getEntry, render } from 'astro:content';
-import ReadingLayout from '../../../layouts/ReadingLayout.astro';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import { chapterSlug, getChapters } from '../../../lib/novels';
 
 export const getStaticPaths = (async () => {
@@ -29,28 +29,18 @@ const { Content } = await render(chapter);
 const novelUrl = `/novels/${novel.id}/`;
 ---
 
-<ReadingLayout title={`${chapter.data.title} · ${novel.data.title}`}>
-	<p class="muted"><a href={novelUrl}>{novel.data.title}</a> · Chapter {chapter.data.chapter}</p>
-	<article data-pagefind-body>
-		<h1>{chapter.data.title}</h1>
-		<Content />
-	</article>
-
-	<nav class="chapter-nav">
-		{prev ? <a href={`${novelUrl}${chapterSlug(prev.id)}/`}>← {prev.data.title}</a> : <span />}
-		{next ? <a href={`${novelUrl}${chapterSlug(next.id)}/`}>{next.data.title} →</a> : <a href={novelUrl}>Contents</a>}
-	</nav>
-</ReadingLayout>
-
-<style>
-	.chapter-nav {
-		display: flex;
-		justify-content: space-between;
-		gap: 1rem;
-		margin-top: 3rem;
-		padding-top: 1.5rem;
-		border-top: 1px solid var(--rule);
-		font-family: system-ui, sans-serif;
-		font-size: 1rem;
-	}
-</style>
+<StarlightPage
+	frontmatter={{
+		title: chapter.data.title,
+		template: 'splash',
+		prev: prev ? { link: `${novelUrl}${chapterSlug(prev.id)}/`, label: prev.data.title } : false,
+		next: next ? { link: `${novelUrl}${chapterSlug(next.id)}/`, label: next.data.title } : false,
+	}}
+>
+	<div class="asodhra-reading">
+		<p class="asodhra-eyebrow"><a href={novelUrl}>{novel.data.title}</a> · Chapter {chapter.data.chapter}</p>
+		<div class="asodhra-chapter">
+			<Content />
+		</div>
+	</div>
+</StarlightPage>

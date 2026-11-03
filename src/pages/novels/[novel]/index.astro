@@ -1,8 +1,8 @@
 ---
 import type { GetStaticPaths } from 'astro';
 import { render } from 'astro:content';
-import ReadingLayout from '../../../layouts/ReadingLayout.astro';
-import { chapterSlug, getChapters, getNovels } from '../../../lib/novels';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { chapterSlug, getChapters, getNovels, romanNumeral } from '../../../lib/novels';
 
 export const getStaticPaths = (async () => {
 	const novels = await getNovels();
@@ -14,20 +14,25 @@ const chapters = await getChapters(novel.id);
 const { Content } = await render(novel);
 ---
 
-<ReadingLayout title={novel.data.title} description={novel.data.description}>
-	<article data-pagefind-body>
-		<h1>{novel.data.title}</h1>
+<StarlightPage frontmatter={{ title: novel.data.title, description: novel.data.description, template: 'splash' }}>
+	<div class="asodhra-reading">
+		<p class="asodhra-eyebrow">The Dream Stalker Trilogy · Book {romanNumeral(novel.data.book)}</p>
 		<Content />
-	</article>
 
-	<h2>Chapters</h2>
-	<ol>
+		<h2>Chapters</h2>
 		{
-			chapters.map((chapter) => (
-				<li value={chapter.data.chapter}>
-					<a href={`/novels/${novel.id}/${chapterSlug(chapter.id)}/`}>{chapter.data.title}</a>
-				</li>
-			))
+			chapters.length > 0 ? (
+				<ol class="asodhra-toc not-content">
+					{chapters.map((chapter) => (
+						<li>
+							<span class="asodhra-toc-number">{chapter.data.chapter}</span>
+							<a href={`/novels/${novel.id}/${chapterSlug(chapter.id)}/`}>{chapter.data.title}</a>
+						</li>
+					))}
+				</ol>
+			) : (
+				<p>Chapters coming soon.</p>
+			)
 		}
-	</ol>
-</ReadingLayout>
+	</div>
+</StarlightPage>

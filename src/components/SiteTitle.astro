@@ -1,0 +1,13 @@
+---
+// Starlight's site title, followed by links to the site's two sections. This
+// override puts them in the header on every page, including phones.
+import Default from '@astrojs/starlight/components/SiteTitle.astro';
+
+const path = Astro.url.pathname;
+---
+
+<Default />
+<nav class="asodhra-nav" aria-label="Sections">
+	<a href="/#books" aria-current={path.startsWith('/novels/') ? 'true' : undefined}>Novels</a>
+	<a href="/lore/" aria-current={path.startsWith('/lore/') ? 'true' : undefined}>Lore</a>
+</nav>

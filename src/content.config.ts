@@ -14,7 +14,8 @@ export const collections = {
 		schema: z.object({
 			title: z.string(),
 			description: z.string(),
-			order: z.number().int(),
+			// Position in the Dream Stalker Trilogy, shown as "Book I", "Book II"...
+			book: z.number().int().positive(),
 		}),
 	}),
 

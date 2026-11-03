@@ -1,0 +1,365 @@
+/*
+ * Asodhra theme, taken from the Rotten Gods cover: a blood-red sky, an ember
+ * eye and gold lettering by night; sandstone and crimson by day. Headings use
+ * Cinzel (the cover's carved capitals) and body text uses Literata.
+ *
+ * Starlight's own variables are in a CSS layer, so these unlayered rules win.
+ */
+
+:root {
+	--sl-font: 'Literata Variable', Georgia, serif;
+	--asodhra-font-display: 'Cinzel Variable', Georgia, serif;
+	--asodhra-star: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12.8 7.2 16.8 11.2 24 12 16.8 12.8 12.8 16.8 12 24 11.2 16.8 7.2 12.8 0 12 7.2 11.2 11.2 7.2 12 0Z'/%3E%3C/svg%3E");
+
+	/* Dark mode (Starlight's default): night under the rotten god's eye */
+	--sl-color-white: #fbf3e4;
+	--sl-color-gray-1: #eee2d0;
+	--sl-color-gray-2: #dccbb6;
+	--sl-color-gray-3: #a68b7e;
+	--sl-color-gray-4: #6e5048;
+	--sl-color-gray-5: #3a2420;
+	--sl-color-gray-6: #1f1210;
+	--sl-color-black: #140b0a;
+
+	--sl-color-accent-low: #3b1c12;
+	--sl-color-accent: #c8902f;
+	--sl-color-accent-high: #e9c27a;
+
+	--asodhra-ornament: var(--sl-color-accent);
+
+	/* The eye and book cards look the same in both modes, like printed covers. */
+	--asodhra-pupil: #070303;
+	--asodhra-ember: #e0582e;
+	--asodhra-flame: #f6a13a;
+	--asodhra-crimson: #8f1616;
+	--asodhra-blood: #3b0a08;
+	--asodhra-gold: #e9c27a;
+	--asodhra-cream: #f3e6d0;
+}
+
+/* Light mode: desert sandstone and crimson ink */
+:root[data-theme='light'] {
+	--sl-color-white: #1c120e;
+	--sl-color-gray-1: #2b1d17;
+	--sl-color-gray-2: #3b2a22;
+	--sl-color-gray-3: #6b5546;
+	--sl-color-gray-4: #9a8270;
+	--sl-color-gray-5: #cdb9a0;
+	--sl-color-gray-6: #e8dac4;
+	--sl-color-gray-7: #f2e8d8;
+	--sl-color-black: #f8f1e5;
+
+	--sl-color-accent-low: #f3d6c8;
+	--sl-color-accent: #a3221b;
+	--sl-color-accent-high: #5e110e;
+
+	--asodhra-ornament: #a87a2a;
+}
+
+/* Typography */
+
+:is(h1, h2, h3, h4, h5, h6),
+.site-title {
+	font-family: var(--asodhra-font-display);
+	letter-spacing: 0.03em;
+}
+
+/* Header */
+
+header.header {
+	border-bottom-color: transparent;
+	background-image: linear-gradient(to right, transparent, var(--asodhra-ornament), transparent);
+	background-size: 100% 1px;
+	background-position: bottom;
+	background-repeat: no-repeat;
+}
+
+.site-title {
+	gap: 0.5rem;
+	color: var(--sl-color-text-accent);
+	letter-spacing: 0.12em;
+}
+
+.site-title img {
+	width: auto;
+	height: 1.25rem;
+}
+
+.asodhra-nav {
+	display: flex;
+	gap: 1.25rem;
+	align-items: center;
+	margin-inline-start: 1.5rem;
+}
+
+.asodhra-nav a {
+	font-family: var(--asodhra-font-display);
+	font-size: var(--sl-text-sm);
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: var(--sl-color-gray-2);
+}
+
+.asodhra-nav a:hover,
+.asodhra-nav a[aria-current] {
+	color: var(--sl-color-text-accent);
+}
+
+@media (max-width: 30rem) {
+	.site-title span {
+		display: none;
+	}
+
+	.asodhra-nav {
+		margin-inline-start: 0.75rem;
+	}
+}
+
+/* Ornaments */
+
+/* Scene breaks (--- in Markdown) become three stars. */
+.sl-markdown-content hr:not(:where(.not-content *)) {
+	width: 3.2rem;
+	height: 0.85rem;
+	margin: 2.5rem auto;
+	border: 0;
+	background-color: var(--asodhra-ornament);
+	-webkit-mask: var(--asodhra-star) center / 0.85rem 0.85rem space;
+	mask: var(--asodhra-star) center / 0.85rem 0.85rem space;
+}
+
+/* A heading flanked by stars, e.g. on the home page. */
+.asodhra-flourish::before,
+.asodhra-flourish::after {
+	content: '';
+	display: inline-block;
+	width: 0.6em;
+	height: 0.6em;
+	margin-inline: 0.6em;
+	vertical-align: 0.1em;
+	background-color: var(--asodhra-ornament);
+	-webkit-mask: var(--asodhra-star) center / contain no-repeat;
+	mask: var(--asodhra-star) center / contain no-repeat;
+}
+
+/* Reading pages (novels and chapters) */
+
+main:has(.asodhra-reading) .sl-container {
+	max-width: 40rem;
+}
+
+.asodhra-reading {
+	font-size: var(--sl-text-lg);
+	line-height: 1.8;
+}
+
+.asodhra-eyebrow {
+	font-family: var(--asodhra-font-display);
+	font-size: var(--sl-text-sm);
+	font-weight: 600;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--sl-color-gray-3);
+}
+
+.asodhra-eyebrow a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.asodhra-eyebrow a:hover {
+	color: var(--sl-color-text-accent);
+}
+
+.asodhra-chapter > p:first-of-type::first-letter {
+	float: left;
+	margin: 0.08em 0.12em 0 0;
+	font-family: var(--asodhra-font-display);
+	font-size: 3.4em;
+	font-weight: 700;
+	line-height: 0.8;
+	color: var(--sl-color-text-accent);
+}
+
+.asodhra-toc {
+	padding: 0;
+	list-style: none;
+}
+
+.asodhra-toc li {
+	display: flex;
+	gap: 1rem;
+	align-items: baseline;
+	padding-block: 0.6rem;
+	border-bottom: 1px solid var(--sl-color-hairline-light);
+}
+
+.asodhra-toc .asodhra-toc-number {
+	min-width: 2rem;
+	font-family: var(--asodhra-font-display);
+	color: var(--asodhra-ornament);
+}
+
+.asodhra-toc a {
+	color: var(--sl-color-white);
+	text-decoration: none;
+}
+
+.asodhra-toc a:hover {
+	color: var(--sl-color-text-accent);
+}
+
+/* Home page hero: the eye of a rotten god above the title */
+
+[data-has-hero] .hero {
+	grid-template-columns: 100%;
+	padding-block: clamp(2.5rem, calc(1rem + 8vmin), 6rem) 1rem;
+}
+
+[data-has-hero] .hero > .hero-html {
+	order: 0;
+	width: auto;
+}
+
+[data-has-hero] .hero .stack {
+	text-align: center;
+}
+
+[data-has-hero] .hero :is(.copy, .actions) {
+	align-items: center;
+	justify-content: center;
+}
+
+[data-has-hero] .hero h1 {
+	font-size: clamp(2.75rem, calc(1rem + 7vw), 5rem);
+	letter-spacing: 0.14em;
+	color: var(--sl-color-text-accent);
+}
+
+[data-has-hero] .hero .tagline {
+	font-style: italic;
+}
+
+.asodhra-eye {
+	position: relative;
+	display: grid;
+	place-items: center;
+	width: clamp(7rem, 20vw, 10rem);
+	aspect-ratio: 1;
+	border-radius: 50%;
+	background: radial-gradient(
+		circle,
+		var(--asodhra-pupil) 0 33%,
+		var(--asodhra-blood) 37%,
+		var(--asodhra-ember) 45%,
+		var(--asodhra-flame) 52%,
+		var(--asodhra-ember) 60%,
+		var(--asodhra-crimson) 70%,
+		transparent 71%
+	);
+	box-shadow: 0 0 4rem color-mix(in srgb, var(--asodhra-ember) 40%, transparent);
+}
+
+/* Iris fibres */
+.asodhra-eye::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border-radius: 50%;
+	background: repeating-conic-gradient(rgb(0 0 0 / 0.22) 0 2deg, transparent 2deg 6deg);
+	-webkit-mask: radial-gradient(circle, transparent 0 36%, #000 42% 66%, transparent 70%);
+	mask: radial-gradient(circle, transparent 0 36%, #000 42% 66%, transparent 70%);
+}
+
+/* The star in the pupil */
+.asodhra-eye::after {
+	content: '';
+	width: 20%;
+	aspect-ratio: 1;
+	background-color: var(--asodhra-gold);
+	-webkit-mask: var(--asodhra-star) center / contain no-repeat;
+	mask: var(--asodhra-star) center / contain no-repeat;
+}
+
+/* Home page book cards, styled like small covers */
+
+.asodhra-books {
+	margin-top: 3rem;
+	text-align: center;
+}
+
+.asodhra-books h2 {
+	font-size: var(--sl-text-h3);
+	color: var(--sl-color-white);
+}
+
+.asodhra-book-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(12rem, 16rem));
+	gap: 1.5rem;
+	justify-content: center;
+	margin-top: 2rem;
+}
+
+.asodhra-book {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	aspect-ratio: 2 / 3;
+	padding: 1.5rem 1.25rem;
+	border: 1px solid color-mix(in srgb, var(--asodhra-gold) 35%, transparent);
+	border-radius: 0.25rem;
+	/* An eye rising over a dark horizon, leaving the bottom clear for text. */
+	background:
+		linear-gradient(to top, var(--asodhra-blood) 0 28%, transparent 52%),
+		radial-gradient(circle at 50% 50%, var(--asodhra-pupil) 0 9%, var(--asodhra-ember) 15%, var(--asodhra-crimson) 30%, var(--asodhra-blood) 62%),
+		var(--asodhra-blood);
+	box-shadow: var(--sl-shadow-md);
+	color: var(--asodhra-cream);
+	text-decoration: none;
+	transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+.asodhra-book:hover,
+.asodhra-book:focus-visible {
+	transform: translateY(-0.25rem);
+	box-shadow: 0 0 2.5rem color-mix(in srgb, var(--asodhra-ember) 45%, transparent);
+}
+
+.asodhra-book-number {
+	font-family: var(--asodhra-font-display);
+	font-size: var(--sl-text-xs);
+	font-weight: 600;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--asodhra-gold);
+}
+
+.asodhra-book-title {
+	font-family: var(--asodhra-font-display);
+	font-size: var(--sl-text-2xl);
+	font-weight: 700;
+	line-height: 1.15;
+	color: var(--asodhra-gold);
+}
+
+.asodhra-book-description {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 4;
+	line-clamp: 4;
+	overflow: hidden;
+	margin-top: auto;
+	font-size: var(--sl-text-sm);
+	line-height: 1.5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.asodhra-book {
+		transition: none;
+	}
+}
