@@ -1,0 +1,40 @@
+---
+// A full-width background image behind a home page section, with an optional
+// second image for light mode. The browser downloads only the image for the
+// current mode. With no image, the section shows the theme's own background
+// (see `.asodhra-art` in src/styles/theme.css).
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+
+interface Props {
+	/** Shown in dark mode, and in light mode too unless `light` is given. */
+	dark?: ImageMetadata;
+	light?: ImageMetadata;
+	/** CSS background-position, to keep the subject in view when cropped. */
+	position?: string;
+	class?: string;
+}
+
+const { dark, light = dark, position = 'center', class: className } = Astro.props;
+
+// A phone-sized and a full-sized copy of each image.
+async function sizes(src: ImageMetadata | undefined) {
+	if (!src) return undefined;
+	const [small, large] = await Promise.all(
+		[1200, 2400].map((width) => getImage({ src, width: Math.min(width, src.width), format: 'webp' })),
+	);
+	return { small: `url(${small.src})`, large: `url(${large.src})` };
+}
+
+const [darkArt, lightArt] = await Promise.all([sizes(dark), sizes(light)]);
+const style = [
+	`--art-position: ${position}`,
+	darkArt && `--art-dark: ${darkArt.large}; --art-dark-small: ${darkArt.small}`,
+	lightArt && `--art-light: ${lightArt.large}; --art-light-small: ${lightArt.small}`,
+]
+	.filter(Boolean)
+	.join('; ');
+---
+
+<div class:list={['asodhra-art', className]} style={style} data-has-art={dark ? '' : undefined} aria-hidden="true">
+</div>

@@ -1,6 +1,6 @@
 # asodhra.com
 
-A free static website for the world of Asodhra, a literary universe developed by Jeremy Bruce Adams (the author) and owned by Brass Jungle (the self-publishing imprint). The novels set within Asodhra are geared toward fans of epic fantasy and cosmic & eldritch horror. Currently the Asodhra novels include The Dream Stalker Trilogy (*Rotten Gods* and *Heaven's Chains*).
+A free static website for the world of Asodhra, a literary universe developed by Jeremy Bruce Adams (the author) and owned by Brass Jungle (the self-publishing imprint). The novels set within Asodhra are geared toward fans of epic fantasy and cosmic & eldritch horror. Every story set in Asodhra belongs to *The Asodhran Sagas*, the catch-all name for the world's fiction. Currently these include The Dream Stalker Trilogy (*Rotten Gods* and *Heaven's Chains*).
 
 Both full novels and lore articles are included in this site. The site is hosted on GitHub Pages at the custom domain `asodhra.com`.
 
@@ -19,6 +19,8 @@ Both full novels and lore articles are included in this site. The site is hosted
 - `src/pages/`: the home page and novel/chapter routes, rendered with Starlight's `StarlightPage` component.
 - `src/styles/theme.css`: the site theme (colors, fonts, ornaments, home page and reading styles).
 - `src/components/SiteTitle.astro`: overrides Starlight's site title to add the Novels/Lore header links.
+- `docs/HOMEPAGE.md`: the home page copy. `src/pages/index.astro` holds the same text; change both together.
+- `src/components/SectionArt.astro`: a full-width background image behind a home page section, with an optional light-mode image. Set images in the `art` object (and the `hooks` cards) at the top of `src/pages/index.astro`; put the files in `src/assets/home/`. With no image, a section shows a theme background.
 - `public/favicon.svg`: the browser tab icon, a gold four-pointed star.
 - `src/content.config.ts`: collection schemas.
 

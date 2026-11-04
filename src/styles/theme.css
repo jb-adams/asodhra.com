@@ -130,8 +130,9 @@
 
 /* Ornaments */
 
-/* Scene breaks (--- in Markdown) become three stars. */
-.sl-markdown-content hr:not(:where(.not-content *)) {
+/* Scene breaks (--- in Markdown) become three stars, as does <hr class="asodhra-stars">. */
+.sl-markdown-content hr:not(:where(.not-content *)),
+hr.asodhra-stars {
 	width: 3.2rem;
 	height: 0.85rem;
 	margin: 2.5rem auto;
@@ -301,42 +302,546 @@ main:has(.asodhra-backdrop) {
 	color: var(--sl-color-text-accent);
 }
 
-/* Home page hero: the title, centered */
+/* Home page */
+
+/*
+ * Sections stretch their art to the full width of the window, so clip the
+ * sideways overflow (`clip` keeps the page scrolling normally).
+ */
+main:has(.asodhra-home) {
+	position: relative;
+	isolation: isolate;
+	overflow-x: clip;
+}
+
+.asodhra-home {
+	--asodhra-section-gap: clamp(4rem, calc(2rem + 8vw), 7rem);
+	--asodhra-panel: var(--sl-color-gray-6);
+}
+
+:root[data-theme='light'] .asodhra-home {
+	--asodhra-panel: var(--sl-color-gray-7);
+}
+
+.asodhra-home > * + * {
+	margin-top: var(--asodhra-section-gap);
+}
+
+.asodhra-home section {
+	position: relative;
+	isolation: isolate;
+}
+
+/*
+ * Section art (src/components/SectionArt.astro): a full-width image behind a
+ * section, tinted in the theme's colors like the cover washes. Without an
+ * image, each section shows its own theme background instead.
+ */
+.asodhra-art {
+	position: absolute;
+	inset: 0 calc(50% - 50vw);
+	z-index: -1;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.asodhra-art[data-has-art] {
+	opacity: 0.5;
+	-webkit-mask-image: linear-gradient(to bottom, transparent, #000 15% 85%, transparent);
+	mask-image: linear-gradient(to bottom, transparent, #000 15% 85%, transparent);
+}
+
+:root[data-theme='light'] .asodhra-art[data-has-art] {
+	opacity: 0.35;
+}
+
+.asodhra-art[data-has-art]::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: var(--art-dark) var(--art-position) / cover no-repeat;
+}
+
+:root[data-theme='light'] .asodhra-art[data-has-art]::before {
+	background-image: var(--art-light);
+}
+
+@media (max-width: 50rem) {
+	.asodhra-art[data-has-art]::before {
+		background-image: var(--art-dark-small);
+	}
+
+	:root[data-theme='light'] .asodhra-art[data-has-art]::before {
+		background-image: var(--art-light-small);
+	}
+}
+
+.asodhra-art[data-has-art]::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(160deg, #b3261e, #5e0f0c);
+	mix-blend-mode: color;
+}
+
+:root[data-theme='light'] .asodhra-art[data-has-art]::after {
+	background: linear-gradient(160deg, #2a7cb8, #0f3a5e);
+}
+
+/* Hero: the full first screen, under a blood-red sky by night and a cerulean haze by day */
 
 [data-has-hero] .hero {
 	grid-template-columns: 100%;
-	padding-block: clamp(2.5rem, calc(1rem + 8vmin), 6rem) 1rem;
+	align-content: center;
+	min-height: calc(100svh - var(--sl-nav-height) - 3rem);
+	padding-block: 2rem 4rem;
 }
 
 [data-has-hero] .hero .stack {
 	text-align: center;
 }
 
-[data-has-hero] .hero :is(.copy, .actions) {
+[data-has-hero] .hero .copy {
 	align-items: center;
-	justify-content: center;
 }
 
 [data-has-hero] .hero h1 {
-	font-size: clamp(2.75rem, calc(1rem + 7vw), 5rem);
+	font-size: clamp(3rem, calc(1rem + 9vw), 6.5rem);
+	line-height: 1.05;
 	letter-spacing: 0.14em;
 	color: var(--sl-color-text-accent);
 }
 
-[data-has-hero] .hero .tagline {
-	font-style: italic;
+.asodhra-welcome {
+	display: block;
+	margin-bottom: 0.6em;
+	font-size: max(0.25em, 1rem);
+	letter-spacing: 0.4em;
+	color: var(--sl-color-gray-2);
 }
 
-/* Home page books */
+[data-has-hero] .hero .tagline {
+	font-size: clamp(var(--sl-text-lg), calc(0.9rem + 1vw), var(--sl-text-2xl));
+	font-style: italic;
+	color: var(--sl-color-gray-2);
+}
 
-.asodhra-books {
-	margin-top: 3rem;
+.asodhra-hero-art {
+	inset: 0 0 auto;
+	height: calc(100svh - var(--sl-nav-height));
+}
+
+.asodhra-hero-art:not([data-has-art]) {
+	background:
+		radial-gradient(ellipse 90% 70% at 50% 0%, rgb(143 22 22 / 0.55), transparent 70%),
+		radial-gradient(ellipse 60% 40% at 50% 100%, rgb(200 144 47 / 0.12), transparent 70%);
+}
+
+:root[data-theme='light'] .asodhra-hero-art:not([data-has-art]) {
+	background:
+		radial-gradient(ellipse 90% 70% at 50% 0%, rgb(59 143 208 / 0.22), transparent 70%),
+		radial-gradient(ellipse 60% 40% at 50% 100%, rgb(200 144 47 / 0.14), transparent 70%);
+}
+
+.asodhra-hero-art[data-has-art] {
+	-webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+	mask-image: linear-gradient(to bottom, #000 55%, transparent);
+}
+
+/* A thread of gold at the bottom of the first screen, drawing the eye down. */
+.asodhra-scroll-cue {
+	position: absolute;
+	top: calc(100svh - var(--sl-nav-height) - 5rem);
+	left: calc(50% - 0.5px);
+	width: 1px;
+	height: 3.5rem;
+	background: linear-gradient(var(--asodhra-ornament), transparent);
+}
+
+.asodhra-home > .asodhra-scroll-cue {
+	margin-top: 0;
+}
+
+/* Genres: a band across the page */
+
+.asodhra-band {
+	padding-block: clamp(3rem, calc(1.5rem + 5vw), 5rem);
 	text-align: center;
 }
 
-.asodhra-books h2 {
+.asodhra-home > .asodhra-band {
+	/* The hero already leaves room above the band. */
+	margin-top: 0;
+}
+
+.asodhra-band > .asodhra-art:not([data-has-art]) {
+	border-block: 1px solid color-mix(in srgb, var(--asodhra-ornament) 45%, transparent);
+	background: var(--asodhra-panel);
+}
+
+.asodhra-genres {
+	font-size: clamp(1.5rem, calc(1rem + 2.2vw), 2.5rem);
+	line-height: 1.3;
+	color: var(--sl-color-white);
+}
+
+.asodhra-genres-meets {
+	display: block;
+	margin-block: 0.3em;
+	font-family: var(--sl-font);
+	font-size: 0.6em;
+	font-style: italic;
+	font-weight: 400;
+	letter-spacing: 0.02em;
+	color: var(--sl-color-gray-3);
+}
+
+.asodhra-tags {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.5rem 0;
+	margin-top: 1.75rem;
+	padding: 0;
+	list-style: none;
+	font-family: var(--asodhra-font-display);
+	font-size: var(--sl-text-sm);
+	font-weight: 600;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--sl-color-text-accent);
+}
+
+/* Stars between the tags, in place of the copy's pipes. */
+.asodhra-tags li + li::before {
+	content: '';
+	display: inline-block;
+	width: 0.7em;
+	height: 0.7em;
+	margin-inline: 1.1em;
+	vertical-align: 0.05em;
+	background-color: var(--asodhra-ornament);
+	-webkit-mask: var(--asodhra-star) center / contain no-repeat;
+	mask: var(--asodhra-star) center / contain no-repeat;
+}
+
+/* On phones the tags stack, with a star between each. */
+@media (max-width: 40rem) {
+	.asodhra-tags {
+		flex-direction: column;
+		align-items: center;
+		gap: 0.6rem;
+	}
+
+	.asodhra-tags li + li::before {
+		display: block;
+		margin: 0 auto 0.6rem;
+	}
+}
+
+/* Prose: set like a chapter, in a narrow reading column */
+
+.asodhra-prose {
+	max-width: 40rem;
+	margin-inline: auto;
+	font-size: var(--sl-text-lg);
+	line-height: 1.8;
+	color: var(--sl-color-gray-2);
+}
+
+.asodhra-prose > * + * {
+	margin-top: 1rem;
+}
+
+.asodhra-lede::first-letter {
+	float: left;
+	margin: 0.08em 0.12em 0 0;
+	font-family: var(--asodhra-font-display);
+	font-size: 3.4em;
+	font-weight: 700;
+	line-height: 0.8;
+	color: var(--sl-color-text-accent);
+}
+
+.asodhra-home > .asodhra-hooks,
+.asodhra-home > .asodhra-hooks + .asodhra-prose {
+	margin-top: calc(var(--asodhra-section-gap) * 0.6);
+}
+
+/* What sets Asodhra apart */
+
+.asodhra-hooks {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+	gap: 1.5rem;
+}
+
+.asodhra-hook {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	padding: 2rem 1.75rem;
+	overflow: hidden;
+	border: 1px solid color-mix(in srgb, var(--asodhra-ornament) 35%, transparent);
+	border-radius: 0.25rem;
+	background: var(--asodhra-panel);
+	text-align: center;
+}
+
+/* A star above each title. */
+.asodhra-hook::before {
+	content: '';
+	align-self: center;
+	width: 1rem;
+	height: 1rem;
+	background-color: var(--asodhra-ornament);
+	-webkit-mask: var(--asodhra-star) center / contain no-repeat;
+	mask: var(--asodhra-star) center / contain no-repeat;
+}
+
+/* An image across the top of the card, when it has one. */
+.asodhra-hook:has(.asodhra-hook-art) {
+	padding-top: 0;
+}
+
+.asodhra-hook-art {
+	position: relative;
+	inset: auto;
+	z-index: auto;
+	order: -1;
+	aspect-ratio: 3 / 2;
+	margin: 0 -1.75rem 0.5rem;
+}
+
+.asodhra-hook-art[data-has-art] {
+	opacity: 1;
+	-webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent);
+	mask-image: linear-gradient(to bottom, #000 60%, transparent);
+}
+
+.asodhra-hook h3 {
+	font-size: var(--sl-text-xl);
+	line-height: 1.3;
+	color: var(--sl-color-text-accent);
+}
+
+.asodhra-hook p {
+	color: var(--sl-color-gray-2);
+	line-height: 1.7;
+}
+
+/* Not for everyone: the two lists side by side, matching items on the same row */
+
+.asodhra-fit-intro {
+	max-width: 36rem;
+	margin-inline: auto;
+	font-size: clamp(var(--sl-text-lg), calc(0.9rem + 1vw), var(--sl-text-2xl));
+	font-style: italic;
+	line-height: 1.5;
+	text-align: center;
+	color: var(--sl-color-white);
+}
+
+.asodhra-fit-columns {
+	display: grid;
+	gap: 1.5rem;
+	margin-top: 2.5rem;
+}
+
+.asodhra-fit-column {
+	display: grid;
+	gap: 1rem;
+	align-content: start;
+	padding: 1.75rem;
+	border-top: 2px solid var(--sl-color-accent);
+	border-radius: 0.25rem;
+	background: var(--asodhra-panel);
+}
+
+.asodhra-fit-column > p:first-child {
+	font-family: var(--asodhra-font-display);
+	font-size: var(--sl-text-sm);
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--sl-color-text-accent);
+}
+
+.asodhra-fit-column ul {
+	display: grid;
+	gap: 1rem;
+	padding: 0;
+	list-style: none;
+}
+
+.asodhra-fit-column li {
+	position: relative;
+	padding-inline-start: 1.6rem;
+	line-height: 1.6;
+	color: var(--sl-color-gray-2);
+}
+
+.asodhra-fit-column li::before {
+	content: '';
+	position: absolute;
+	inset-inline-start: 0;
+	top: 0.45em;
+	width: 0.75em;
+	height: 0.75em;
+	background-color: var(--asodhra-ornament);
+	-webkit-mask: var(--asodhra-star) center / contain no-repeat;
+	mask: var(--asodhra-star) center / contain no-repeat;
+}
+
+.asodhra-fit-verdict {
+	font-style: italic;
+	color: var(--sl-color-white);
+}
+
+/* The other list is dimmed, its stars snuffed out to plain dashes. */
+.asodhra-fit-no {
+	border-top-color: var(--sl-color-gray-4);
+}
+
+.asodhra-fit-no > p:first-child,
+.asodhra-fit-no li,
+.asodhra-fit-no .asodhra-fit-verdict {
+	color: var(--sl-color-gray-3);
+}
+
+.asodhra-fit-no li::before {
+	top: 0.8em;
+	height: 1px;
+	background-color: var(--sl-color-gray-4);
+	-webkit-mask: none;
+	mask: none;
+}
+
+@media (min-width: 50rem) {
+	.asodhra-fit-columns {
+		grid-template-columns: 1fr 1fr;
+		gap: 0 2rem;
+	}
+
+	/* Rows: the lead-in, four items, the verdict. */
+	.asodhra-fit-column {
+		grid-row: span 6;
+		grid-template-rows: subgrid;
+	}
+
+	.asodhra-fit-column ul {
+		grid-row: span 4;
+		grid-template-rows: subgrid;
+	}
+}
+
+.asodhra-home hr.asodhra-stars {
+	margin-block: 3.5rem 0;
+}
+
+/* A section that follows a row of stars needs less room above it. */
+.asodhra-home > :has(> hr.asodhra-stars:last-child) + * {
+	margin-top: 3.5rem;
+}
+
+/* Begin: the books, and the way in */
+
+.asodhra-begin {
+	padding-block: 1rem 2rem;
+	text-align: center;
+}
+
+.asodhra-begin > .asodhra-art:not([data-has-art]) {
+	background: radial-gradient(ellipse 70% 45% at 50% 60%, rgb(143 22 22 / 0.4), transparent 70%);
+}
+
+:root[data-theme='light'] .asodhra-begin > .asodhra-art:not([data-has-art]) {
+	background: radial-gradient(ellipse 70% 45% at 50% 60%, rgb(59 143 208 / 0.16), transparent 70%);
+}
+
+.asodhra-begin-lede {
+	max-width: 34rem;
+	margin: 0 auto 3rem;
+	font-size: clamp(var(--sl-text-lg), calc(0.9rem + 1vw), var(--sl-text-2xl));
+	line-height: 1.5;
+	color: var(--sl-color-white);
+}
+
+.asodhra-begin h2 {
 	font-size: var(--sl-text-h3);
 	color: var(--sl-color-white);
+}
+
+@media (max-width: 30rem) {
+	/* The title fills a phone's width, so drop the flanking stars. */
+	.asodhra-begin h2::before,
+	.asodhra-begin h2::after {
+		display: none;
+	}
+}
+
+.asodhra-begin .asodhra-eyebrow {
+	margin-top: 0.5rem;
+}
+
+.asodhra-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: center;
+	margin-top: 3rem;
+}
+
+/* Motion: sections rise into place as they scroll into view. */
+
+@keyframes asodhra-rise {
+	from {
+		opacity: 0;
+		translate: 0 2.5rem;
+	}
+}
+
+@keyframes asodhra-pulse {
+	50% {
+		opacity: 0.35;
+	}
+}
+
+@keyframes asodhra-drift {
+	to {
+		translate: 0 12vh;
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	[data-has-hero] .hero .copy > * {
+		animation: asodhra-rise 1.4s ease-out both;
+	}
+
+	[data-has-hero] .hero .copy > .tagline {
+		animation-delay: 0.5s;
+	}
+
+	.asodhra-scroll-cue {
+		animation:
+			asodhra-rise 1.4s ease-out 1s both,
+			asodhra-pulse 3s ease-in-out 2.4s infinite;
+	}
+
+	@supports (animation-timeline: view()) {
+		.asodhra-reveal {
+			animation: asodhra-rise linear both;
+			animation-timeline: view();
+			animation-range: entry 0% entry 80%;
+		}
+
+		/* The hero image sinks slowly as the page scrolls away from it. */
+		.asodhra-hero-art[data-has-art]::before {
+			animation: asodhra-drift linear both;
+			animation-timeline: scroll();
+			animation-range: 0 100vh;
+		}
+	}
 }
 
 .asodhra-book-grid {
