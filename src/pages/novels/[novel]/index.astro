@@ -11,7 +11,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { novel } = Astro.props;
-const { cover, palette } = novel.data;
+const { cover } = novel.data;
 const chapters = await getChapters(novel.id);
 const { Content } = await render(novel);
 // A small copy of the cover, blurred by CSS into a wash of color behind the title.
@@ -19,7 +19,7 @@ const backdrop = cover && (await getImage({ src: cover, width: 160, format: 'web
 ---
 
 <StarlightPage frontmatter={{ title: novel.data.title, description: novel.data.description, template: 'splash' }}>
-	<div class="asodhra-reading" data-palette={palette}>
+	<div class="asodhra-reading">
 		{backdrop && <div class="asodhra-backdrop" style={`--asodhra-backdrop: url(${backdrop.src})`} aria-hidden="true" />}
 		<p class="asodhra-eyebrow">The Dream Stalker Trilogy · Book {romanNumeral(novel.data.book)}</p>
 		<div class="asodhra-novel-intro">

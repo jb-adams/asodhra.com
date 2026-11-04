@@ -37,7 +37,7 @@ const novelUrl = `/novels/${novel.id}/`;
 		next: next ? { link: `${novelUrl}${chapterSlug(next.id)}/`, label: next.data.title } : false,
 	}}
 >
-	<div class="asodhra-reading" data-palette={novel.data.palette}>
+	<div class="asodhra-reading">
 		<p class="asodhra-eyebrow"><a href={novelUrl}>{novel.data.title}</a> · Chapter {chapter.data.chapter}</p>
 		<div class="asodhra-chapter">
 			<Content />

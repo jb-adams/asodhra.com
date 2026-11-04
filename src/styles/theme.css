@@ -1,9 +1,11 @@
 /*
- * Asodhra theme, taken from the covers. The site default and Rotten Gods use
- * the first cover: a blood-red sky, an ember eye and gold lettering by night;
- * sandstone and crimson by day. Heaven's Chains uses its jungle cover, and the
- * lore wiki uses the Sorkarian Order's cerulean and gold. Headings use Cinzel
- * (the covers' carved capitals) and body text uses Literata.
+ * Asodhra theme: two palettes, one per color mode. Headings use Cinzel (the
+ * covers' carved capitals) and body text uses Literata.
+ *
+ * Dark mode is the Crimson Isles, from the cover of Rotten Gods: night under a
+ * blood-red sky, dark crimson and near-black red, with gold accents.
+ * Light mode is the Sorkarian Order: a sandstone page inked in navy and
+ * cerulean, like the Order's jackets, with gold accents.
  *
  * Starlight's own variables are in a CSS layer, so these unlayered rules win.
  */
@@ -13,121 +15,48 @@
 	--asodhra-font-display: 'Cinzel Variable', Georgia, serif;
 	--asodhra-star: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12.8 7.2 16.8 11.2 24 12 16.8 12.8 12.8 16.8 12 24 11.2 16.8 7.2 12.8 0 12 7.2 11.2 11.2 7.2 12 0Z'/%3E%3C/svg%3E");
 
-	/* Dark mode (Starlight's default): night under the rotten god's eye */
+	/* Dark mode (Starlight's default): the Crimson Isles */
 	--sl-color-white: #fbf3e4;
 	--sl-color-gray-1: #eee2d0;
 	--sl-color-gray-2: #dccbb6;
-	--sl-color-gray-3: #a68b7e;
-	--sl-color-gray-4: #6e5048;
-	--sl-color-gray-5: #3a2420;
-	--sl-color-gray-6: #1f1210;
-	--sl-color-black: #140b0a;
+	--sl-color-gray-3: #b09284;
+	--sl-color-gray-4: #6e4842;
+	--sl-color-gray-5: #3d1816;
+	--sl-color-gray-6: #230d0d;
+	--sl-color-black: #150909;
 
-	--sl-color-accent-low: #3b1c12;
+	--sl-color-accent-low: #4a1512;
 	--sl-color-accent: #c8902f;
 	--sl-color-accent-high: #e9c27a;
 
 	--asodhra-ornament: var(--sl-color-accent);
 
-	/* The eye and placeholder covers look the same in both modes, like print. */
+	/* The placeholder cover looks the same in both modes, like print. */
 	--asodhra-pupil: #070303;
 	--asodhra-ember: #e0582e;
-	--asodhra-flame: #f6a13a;
 	--asodhra-crimson: #8f1616;
 	--asodhra-blood: #3b0a08;
 	--asodhra-gold: #e9c27a;
-	--asodhra-mist: #6fb7c9;
-
-	/* The Sorkarian Order's ceremonial jacket: cerulean embroidered with gold. */
-	--asodhra-cerulean: #16639a;
-	--asodhra-embroidery: #e5c271;
-	--asodhra-trim: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='10' viewBox='0 0 24 10'%3E%3Crect width='24' height='10' fill='%2316639a'/%3E%3Cpath d='M0 1.25H24M0 8.75H24' stroke='%23e5c271' stroke-width='.7' stroke-dasharray='2 1'/%3E%3Cpath d='M12 2.5C12.3 4.2 12.8 4.7 14.5 5 12.8 5.3 12.3 5.8 12 7.5 11.7 5.8 11.2 5.3 9.5 5 11.2 4.7 11.7 4.2 12 2.5Z' fill='%23e5c271'/%3E%3Ccircle cx='0' cy='5' r='.9' fill='%23e5c271'/%3E%3Ccircle cx='24' cy='5' r='.9' fill='%23e5c271'/%3E%3C/svg%3E");
 }
 
-/* Light mode: desert sandstone and crimson ink */
+/* Light mode: the Sorkarian Order */
 :root[data-theme='light'] {
-	--sl-color-white: #1c120e;
-	--sl-color-gray-1: #2b1d17;
-	--sl-color-gray-2: #3b2a22;
-	--sl-color-gray-3: #6b5546;
-	--sl-color-gray-4: #9a8270;
+	--sl-color-white: #0e1729;
+	--sl-color-gray-1: #16223a;
+	--sl-color-gray-2: #22304a;
+	--sl-color-gray-3: #4b5670;
+	--sl-color-gray-4: #7d8598;
 	--sl-color-gray-5: #cdb9a0;
 	--sl-color-gray-6: #e8dac4;
 	--sl-color-gray-7: #f2e8d8;
 	--sl-color-black: #f8f1e5;
 
-	--sl-color-accent-low: #f3d6c8;
-	--sl-color-accent: #a3221b;
-	--sl-color-accent-high: #5e110e;
-
-	--asodhra-ornament: #a87a2a;
-}
-
-/*
- * Heaven's Chains: canopy, mist and silver, from the jungle on its cover.
- * Applies to pages whose content is marked data-palette="jungle".
- */
-:root:not([data-theme='light']):has(.asodhra-reading[data-palette='jungle']) {
-	--sl-color-white: #f1f6f3;
-	--sl-color-gray-1: #e2ebe8;
-	--sl-color-gray-2: #c9d6d4;
-	--sl-color-gray-3: #8aa1a3;
-	--sl-color-gray-4: #4b6266;
-	--sl-color-gray-5: #24363a;
-	--sl-color-gray-6: #121d1c;
-	--sl-color-black: #0c1413;
-
-	--sl-color-accent-low: #12303a;
-	--sl-color-accent: #5d9fb5;
-	--sl-color-accent-high: #9fd0de;
-
-	--asodhra-ornament: #b9c8cc;
-}
-
-:root[data-theme='light']:has(.asodhra-reading[data-palette='jungle']) {
-	--sl-color-white: #0f1a19;
-	--sl-color-gray-1: #1a2726;
-	--sl-color-gray-2: #263634;
-	--sl-color-gray-3: #4e6461;
-	--sl-color-gray-4: #7f9592;
-	--sl-color-gray-5: #b2c4c1;
-	--sl-color-gray-6: #d5e1de;
-	--sl-color-gray-7: #e3ece9;
-	--sl-color-black: #eef3f1;
-
-	--sl-color-accent-low: #cfe6e6;
-	--sl-color-accent: #1d6670;
-	--sl-color-accent-high: #0f3f45;
-
-	--asodhra-ornament: #4f7f78;
-}
-
-/*
- * The lore wiki is the Sorkarian Order's archive: cerulean and gold, like the
- * Order's ceremonial jacket. Lore pages are the only ones with a sidebar.
- */
-:root[data-has-sidebar]:not([data-theme='light']) {
-	--sl-color-white: #f6f1e6;
-	--sl-color-gray-1: #e6e8ee;
-	--sl-color-gray-2: #d3d9e4;
-	--sl-color-gray-3: #8e9bb3;
-	--sl-color-gray-4: #4f5d78;
-	--sl-color-gray-5: #24324d;
-	--sl-color-gray-6: #101a2c;
-	--sl-color-black: #0b1220;
-
-	--sl-color-accent-low: #11294a;
-	--sl-color-accent: #3b8fd0;
-	--sl-color-accent-high: #8cc8f0;
-
-	--asodhra-ornament: #d9b25f;
-}
-
-/* By day the archive keeps the sandstone page, inked in cerulean like Jaipur's blue pottery. */
-:root[data-has-sidebar][data-theme='light'] {
 	--sl-color-accent-low: #d6e6f3;
 	--sl-color-accent: #1b5e92;
 	--sl-color-accent-high: #0f3a5e;
+
+	/* Dark enough to pass as text, since chapter numbers use it. */
+	--asodhra-ornament: #8a6418;
 }
 
 /* Typography */
@@ -138,31 +67,11 @@
 	letter-spacing: 0.03em;
 }
 
-/* Header, edged with the Order's embroidered trim */
-
-header.header {
-	border-bottom: 0;
-	background-image: var(--asodhra-trim);
-	background-repeat: repeat-x;
-	background-position: bottom;
-	background-size: auto 0.625rem;
-}
+/* Header */
 
 .site-title {
-	gap: 0.5rem;
 	color: var(--sl-color-text-accent);
 	letter-spacing: 0.12em;
-}
-
-/* The star mark, drawn in the title's color so it follows each palette. */
-.site-title::before {
-	content: '';
-	flex-shrink: 0;
-	width: 1.25rem;
-	height: 1.25rem;
-	background-color: currentColor;
-	-webkit-mask: var(--asodhra-star) center / contain no-repeat;
-	mask: var(--asodhra-star) center / contain no-repeat;
 }
 
 .asodhra-nav {
@@ -188,18 +97,34 @@ header.header {
 }
 
 @media (max-width: 30rem) {
-	/* Only the star shows on phones; the name stays for screen readers. */
-	.site-title span {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		overflow: hidden;
-		clip-path: inset(50%);
-		white-space: nowrap;
+	.site-title {
+		letter-spacing: 0.06em;
 	}
 
 	.asodhra-nav {
 		margin-inline-start: 0.75rem;
+	}
+}
+
+/* The narrowest phones also fit the search and menu buttons beside the name. */
+@media (max-width: 24rem) {
+	header.header {
+		--sl-nav-gap: 0.5rem;
+	}
+
+	.site-title {
+		font-size: var(--sl-text-base);
+		letter-spacing: 0.02em;
+	}
+
+	.asodhra-nav {
+		gap: 0.625rem;
+		margin-inline-start: 0.625rem;
+	}
+
+	.asodhra-nav a {
+		font-size: var(--sl-text-xs);
+		letter-spacing: 0.06em;
 	}
 }
 
@@ -228,21 +153,6 @@ header.header {
 	background-color: var(--asodhra-ornament);
 	-webkit-mask: var(--asodhra-star) center / contain no-repeat;
 	mask: var(--asodhra-star) center / contain no-repeat;
-}
-
-/* A button in the Order's colors: cerulean, edged and stitched in gold. */
-.sl-link-button.asodhra-sorkarian-button {
-	border: 1px solid var(--asodhra-embroidery);
-	background-color: var(--asodhra-cerulean);
-	box-shadow:
-		inset 0 0 0 2px var(--asodhra-cerulean),
-		inset 0 0 0 3px color-mix(in srgb, var(--asodhra-embroidery) 60%, transparent);
-	color: #f6f1e6;
-}
-
-.sl-link-button.asodhra-sorkarian-button:hover {
-	background-color: #1b72ae;
-	color: #fff;
 }
 
 /* Reading pages (novels and chapters) */
@@ -315,19 +225,19 @@ main:has(.asodhra-backdrop) {
 }
 
 /*
- * The jungle cover is mostly silver mist, so blurred it turns gray. Recolor it
- * teal to moss, keeping the light and shade of the art.
+ * Tint the wash in the theme's colors, keeping the light and shade of the art,
+ * so every cover reads the same: crimson by night, cerulean by day.
  */
-[data-palette='jungle'] > .asodhra-backdrop {
-	isolation: isolate;
-}
-
-[data-palette='jungle'] > .asodhra-backdrop::after {
+.asodhra-backdrop::after {
 	content: '';
 	position: absolute;
 	inset: 0;
-	background: linear-gradient(160deg, #2f8a8f, #2f6d4a);
+	background: linear-gradient(160deg, #b3261e, #5e0f0c);
 	mix-blend-mode: color;
+}
+
+:root[data-theme='light'] .asodhra-backdrop::after {
+	background: linear-gradient(160deg, #2a7cb8, #0f3a5e);
 }
 
 .asodhra-reading > .asodhra-backdrop + * {
@@ -391,16 +301,11 @@ main:has(.asodhra-backdrop) {
 	color: var(--sl-color-text-accent);
 }
 
-/* Home page hero: the eye of a rotten god above the title */
+/* Home page hero: the title, centered */
 
 [data-has-hero] .hero {
 	grid-template-columns: 100%;
 	padding-block: clamp(2.5rem, calc(1rem + 8vmin), 6rem) 1rem;
-}
-
-[data-has-hero] .hero > .hero-html {
-	order: 0;
-	width: auto;
 }
 
 [data-has-hero] .hero .stack {
@@ -420,47 +325,6 @@ main:has(.asodhra-backdrop) {
 
 [data-has-hero] .hero .tagline {
 	font-style: italic;
-}
-
-.asodhra-eye {
-	position: relative;
-	display: grid;
-	place-items: center;
-	width: clamp(7rem, 20vw, 10rem);
-	aspect-ratio: 1;
-	border-radius: 50%;
-	background: radial-gradient(
-		circle,
-		var(--asodhra-pupil) 0 33%,
-		var(--asodhra-blood) 37%,
-		var(--asodhra-ember) 45%,
-		var(--asodhra-flame) 52%,
-		var(--asodhra-ember) 60%,
-		var(--asodhra-crimson) 70%,
-		transparent 71%
-	);
-	box-shadow: 0 0 4rem color-mix(in srgb, var(--asodhra-ember) 40%, transparent);
-}
-
-/* Iris fibres */
-.asodhra-eye::before {
-	content: '';
-	position: absolute;
-	inset: 0;
-	border-radius: 50%;
-	background: repeating-conic-gradient(rgb(0 0 0 / 0.22) 0 2deg, transparent 2deg 6deg);
-	-webkit-mask: radial-gradient(circle, transparent 0 36%, #000 42% 66%, transparent 70%);
-	mask: radial-gradient(circle, transparent 0 36%, #000 42% 66%, transparent 70%);
-}
-
-/* The star in the pupil */
-.asodhra-eye::after {
-	content: '';
-	width: 20%;
-	aspect-ratio: 1;
-	background-color: var(--asodhra-gold);
-	-webkit-mask: var(--asodhra-star) center / contain no-repeat;
-	mask: var(--asodhra-star) center / contain no-repeat;
 }
 
 /* Home page books */
@@ -484,16 +348,11 @@ main:has(.asodhra-backdrop) {
 }
 
 .asodhra-book {
-	--asodhra-glow: var(--asodhra-ember);
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
 	color: var(--sl-color-gray-2);
 	text-decoration: none;
-}
-
-.asodhra-book[data-glow='jungle'] {
-	--asodhra-glow: var(--asodhra-mist);
 }
 
 .asodhra-book-cover {
@@ -513,7 +372,7 @@ main:has(.asodhra-backdrop) {
 .asodhra-book:hover .asodhra-book-cover,
 .asodhra-book:focus-visible .asodhra-book-cover {
 	transform: translateY(-0.25rem);
-	box-shadow: 0 0 2.5rem color-mix(in srgb, var(--asodhra-glow) 50%, transparent);
+	box-shadow: 0 0 2.5rem color-mix(in srgb, var(--sl-color-accent) 50%, transparent);
 }
 
 .asodhra-book-number {

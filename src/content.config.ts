@@ -18,8 +18,6 @@ export const collections = {
 				// Position in the Dream Stalker Trilogy, shown as "Book I", "Book II"...
 				book: z.number().int().positive(),
 				cover: image().optional(),
-				// Color scheme for the book's own pages, defined in src/styles/theme.css.
-				palette: z.enum(['ember', 'jungle']).default('ember'),
 			}),
 	}),
 

@@ -15,12 +15,11 @@ const [firstNovel] = novels;
 		pagefind: false,
 		hero: {
 			tagline: 'The world of the Dream Stalker Trilogy, where ancient powers feed on souls through dreams.',
-			image: { html: '<div class="asodhra-eye" aria-hidden="true"></div>' },
 			actions: [
 				...(firstNovel
 					? [{ text: `Start reading ${firstNovel.data.title}`, link: `/novels/${firstNovel.id}/`, icon: 'right-arrow' as const }]
 					: []),
-				{ text: 'Explore the lore', link: '/lore/', attrs: { class: 'asodhra-sorkarian-button' } },
+				{ text: 'Explore the lore', link: '/lore/', variant: 'secondary' as const },
 			],
 		},
 	}}
@@ -31,7 +30,7 @@ const [firstNovel] = novels;
 		<div class="asodhra-book-grid">
 			{
 				novels.map((novel) => (
-					<a class="asodhra-book" data-glow={novel.data.palette} href={`/novels/${novel.id}/`}>
+					<a class="asodhra-book" href={`/novels/${novel.id}/`}>
 						{novel.data.cover ? (
 							<Image class="asodhra-book-cover" src={novel.data.cover} alt={novel.data.title} widths={[256, 512]} sizes="16rem" />
 						) : (
