@@ -39,7 +39,7 @@ Both full novels and lore articles are included in this site. The site is hosted
 
 ## Branding
 
-The world of Asodhra draws on South and Southeast Asia and the Caribbean (jungle temples, opulent cities like Jaipur and Varanasi, a desert monastery). Beyond this, eldritch horrors lurk in the underworld and create fantastical dream paradises to imprison the souls of their followers.
+The world of Asodhra draws on the Silk Roads, Southeast Asia, and the Caribbean (jungle temples, opulent cities like Jaipur and Varanasi, desert monasteries). Beyond this, eldritch horrors lurk in the underworld and create fantastical dream paradises to imprison the souls of their followers.
 
 There are two color themes: one for light mode and another for dark mode. Both palettes can be found in `src/styles/theme.css`.
 

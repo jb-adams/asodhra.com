@@ -30,8 +30,8 @@ Asodhra is a dark fantasy world teeming with forbidden knowledge and sinister en
 
 Three short hooks, shown as cards. Each card can take an image later.
 
-* **Jeweled Cities & Jungle Temples:** From the jeweled city of Sonanarth to vine-choked temples and a monastery lost in the desert, Asodhra draws on the splendor of South and Southeast Asia and the Caribbean.
-* **Rotten Gods:** Eldritch horrors lurk in the underworld. They lure their followers into fantastical dream paradises, then feed on the souls imprisoned there.
+* **Jeweled Cities & Ancient Ruins:** From the opulent capital of Sonanarth to vine-choked temples and desert monasteries, Asodhra draws on the splendor of the Silk Roads, Southeast Asia, and the Caribbean.
+* **Rotten Gods:** Eldritch horrors lurk in the underworld. They imprison their followers within beautiful dreams, then feast upon their souls.
 * **The Sorkarian Order:** In cerulean jackets embroidered with gold, the assassin priests of the Sorkarian Order wage a secret war against the rotten gods.
 
 ### Invitation
@@ -45,7 +45,7 @@ But if this is your first time here, be aware that the Asodhran Sagas are not fo
 * Fallible protagonists who struggle, make desperate decisions, and wrestle with their inner demons
 * Nuanced morality where the line between good and evil is rarely clear
 * Tragic victories and flat-out defeats
-* Layered magics with mysterious properties
+* Mysterious magic systems with unclear yet consistent properties
 
 Then you might be in the right place.
 
