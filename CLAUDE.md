@@ -21,7 +21,7 @@ Both full novels and lore articles are included in this site. The site is hosted
 - `src/components/SiteTitle.astro`: overrides Starlight's site title to add the Novels/Lore header links.
 - `docs/HOMEPAGE.md`: the home page copy. `src/pages/index.astro` holds the same text; change both together.
 - `src/components/SectionArt.astro`: a full-width background image behind a home page section, with an optional light-mode image. Set images in the `art` object (and the `hooks` cards) at the top of `src/pages/index.astro`; put the files in `src/assets/home/`. With no image, a section shows a theme background.
-- `public/favicon.svg`: the browser tab icon, a gold four-pointed star.
+- `public/favicon.svg`: the browser tab icon, the solar pearl of the Sorkarian Arbiters (a glowing gold-and-ivory orb). After editing it, run `npm run favicons` to remake `public/favicon.ico` and `public/apple-touch-icon.png` (`scripts/favicons.mjs`).
 - `src/content.config.ts`: collection schemas.
 
 ## Tech decisions

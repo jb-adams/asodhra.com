@@ -1,0 +1,58 @@
+---
+// Starlight's footer (chapter previous/next links), followed by the site
+// footer: section links, social links and the copyright notice.
+import Default from '@astrojs/starlight/components/Footer.astro';
+import { Icon } from '@astrojs/starlight/components';
+import { socials } from '../lib/socials';
+
+const sections = [
+	{ label: 'Novels', href: '/#books' },
+	{ label: 'Lore', href: '/lore/' },
+];
+
+// Set when the site is built; every push to main rebuilds it.
+const year = new Date().getFullYear();
+---
+
+<Default />
+<div class="asodhra-footer" data-pagefind-ignore>
+	<hr class="asodhra-stars" />
+	<div class="asodhra-footer-columns">
+		<nav aria-labelledby="asodhra-footer-explore">
+			<h2 id="asodhra-footer-explore">Explore</h2>
+			<ul>
+				{
+					sections.map((link) => (
+						<li>
+							<a href={link.href}>{link.label}</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+		<nav aria-labelledby="asodhra-footer-follow">
+			<h2 id="asodhra-footer-follow">Follow</h2>
+			<ul>
+				{
+					socials.map((link) => (
+						<li>
+							<a href={link.href}>
+								<Icon name={link.icon} size="1.125rem" />
+								{link.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+	</div>
+	<div class="asodhra-footer-legal">
+		<p>© 2024–{year} Jeremy Bruce Adams and Brass Jungle. All rights reserved.</p>
+		<p>
+			<em>The Asodhran Sagas</em> and all text, artwork, and other material on this website are the property of
+			Jeremy Bruce Adams and Brass Jungle. No part of this website may be reproduced, distributed, or transmitted in
+			any form or by any means without prior written permission, except for brief quotations in reviews and other
+			uses permitted by copyright law.
+		</p>
+	</div>
+</div>

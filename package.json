@@ -9,6 +9,7 @@
     "check": "astro check",
     "build": "astro build",
     "preview": "astro preview",
+    "favicons": "node scripts/favicons.mjs",
     "astro": "astro"
   },
   "dependencies": {

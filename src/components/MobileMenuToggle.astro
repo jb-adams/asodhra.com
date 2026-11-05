@@ -1,0 +1,62 @@
+---
+// Starlight's button for the sidebar menu on phones, shown on lore pages. It's
+// a book rather than Starlight's bars, because the bars open the site menu
+// (src/components/Header.astro), and it sits to that menu button's left.
+// Otherwise the same as Starlight's MobileMenuToggle.
+import { Icon } from '@astrojs/starlight/components';
+---
+
+<button popovertarget="starlight__sidebar" class="sl-menu-button sl-flex md:sl-hidden print:hidden">
+	<Icon name="open-book" class="open-menu" />
+	<Icon name="close" class="close-menu" />
+	<span class="sr-only">Lore contents</span>
+</button>
+
+<style>
+	button {
+		position: fixed;
+		top: calc((var(--sl-nav-height) - var(--sl-menu-button-size)) / 2);
+		inset-inline-end: calc(var(--sl-nav-pad-x) + var(--sl-menu-button-size) + var(--asodhra-menu-gap));
+		z-index: var(--sl-z-index-navbar);
+		border: 0;
+		border-radius: 50%;
+		width: var(--sl-menu-button-size);
+		height: var(--sl-menu-button-size);
+		padding: 0.5rem;
+		background-color: var(--sl-color-white);
+		color: var(--sl-color-black);
+		box-shadow: var(--sl-shadow-md);
+		cursor: pointer;
+	}
+
+	button:has(~ :popover-open) {
+		background-color: var(--sl-color-gray-2);
+		box-shadow: none;
+	}
+
+	button:has(~ :popover-open) .open-menu,
+	button:not(:has(~ :popover-open)) .close-menu {
+		display: none;
+	}
+
+	:global([data-theme='light']) button {
+		background-color: var(--sl-color-black);
+		color: var(--sl-color-white);
+	}
+
+	:global([data-theme='light']) button:has(~ :popover-open) {
+		background-color: var(--sl-color-gray-5);
+	}
+</style>
+
+<style is:global>
+	body:has(#starlight__sidebar:popover-open) {
+		overflow: hidden;
+	}
+
+	@media (min-width: 50rem) {
+		body:has(#starlight__sidebar:popover-open) {
+			overflow: auto;
+		}
+	}
+</style>

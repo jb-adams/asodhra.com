@@ -1,0 +1,27 @@
+---
+// Starlight's header, plus the site menu. On phones and narrow windows (under
+// 50rem), Starlight hides the social links and theme selector from the header;
+// the site menu is a button with a small dropdown holding both, on every page.
+// On lore pages, the sidebar's own button (MobileMenuToggle.astro) sits beside it.
+//
+// The dropdown uses the popover API, so it opens, closes on an outside click
+// or Escape, and stays reachable by keyboard without any JavaScript.
+import Default from '@astrojs/starlight/components/Header.astro';
+import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
+import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
+import { Icon } from '@astrojs/starlight/components';
+---
+
+<Default />
+<div class="asodhra-menu print:hidden">
+	<button class="asodhra-menu-button" popovertarget="asodhra-menu" aria-label="Menu">
+		<Icon name="bars" class="asodhra-menu-open" />
+		<Icon name="close" class="asodhra-menu-close" />
+	</button>
+	<div id="asodhra-menu" class="asodhra-menu-panel" popover>
+		<div class="asodhra-menu-socials">
+			<SocialIcons />
+		</div>
+		<ThemeSelect />
+	</div>
+</div>

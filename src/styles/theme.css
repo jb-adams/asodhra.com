@@ -128,6 +128,140 @@
 	}
 }
 
+/* Lore pages have two menu buttons, so the narrowest phones tighten further. */
+@media (max-width: 22.5rem) {
+	:root[data-has-sidebar] {
+		--sl-nav-pad-x: 0.75rem;
+		--asodhra-menu-gap: 0.25rem;
+	}
+
+	:root[data-has-sidebar] header.header {
+		--sl-nav-gap: 0.25rem;
+	}
+
+	:root[data-has-sidebar] .asodhra-nav {
+		gap: 0.5rem;
+		margin-inline-start: 0.5rem;
+	}
+
+	:root[data-has-sidebar] .site-title {
+		letter-spacing: 0;
+	}
+
+	:root[data-has-sidebar] .asodhra-nav a {
+		letter-spacing: 0.03em;
+	}
+}
+
+/*
+ * The site menu (src/components/Header.astro): a button matching Starlight's
+ * sidebar menu button, opening a dropdown with the social links and theme
+ * selector. Only under 50rem, where the header hides them. On lore pages, the
+ * sidebar's button (src/components/MobileMenuToggle.astro) sits to its left.
+ */
+
+:root {
+	--asodhra-menu-gap: 0.5rem;
+}
+
+/* Room for the fixed menu button(s) at the end of the header. */
+header.header {
+	padding-inline-end: calc(var(--sl-nav-gap) + var(--sl-nav-pad-x) + var(--sl-menu-button-size));
+}
+
+:root[data-has-sidebar] header.header {
+	padding-inline-end: calc(
+		var(--sl-nav-gap) + var(--sl-nav-pad-x) + 2 * var(--sl-menu-button-size) + var(--asodhra-menu-gap)
+	);
+}
+
+.asodhra-menu-button {
+	position: fixed;
+	top: calc((var(--sl-nav-height) - var(--sl-menu-button-size)) / 2);
+	inset-inline-end: var(--sl-nav-pad-x);
+	z-index: var(--sl-z-index-navbar);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--sl-menu-button-size);
+	height: var(--sl-menu-button-size);
+	padding: 0.5rem;
+	border: 0;
+	border-radius: 50%;
+	background-color: var(--sl-color-white);
+	color: var(--sl-color-black);
+	box-shadow: var(--sl-shadow-md);
+	cursor: pointer;
+}
+
+.asodhra-menu-button:has(~ :popover-open) {
+	background-color: var(--sl-color-gray-2);
+	box-shadow: none;
+}
+
+:root[data-theme='light'] .asodhra-menu-button {
+	background-color: var(--sl-color-black);
+	color: var(--sl-color-white);
+}
+
+:root[data-theme='light'] .asodhra-menu-button:has(~ :popover-open) {
+	background-color: var(--sl-color-gray-5);
+}
+
+.asodhra-menu-button:has(~ :popover-open) .asodhra-menu-open,
+.asodhra-menu-button:not(:has(~ :popover-open)) .asodhra-menu-close {
+	display: none;
+}
+
+.asodhra-menu-panel {
+	position: fixed;
+	inset: var(--sl-nav-height) var(--sl-nav-pad-x) auto auto;
+	z-index: var(--sl-z-index-menu);
+	margin: 0.5rem 0 0;
+	padding: 0.5rem 0.75rem;
+	border: 1px solid var(--sl-color-hairline);
+	border-radius: 0.5rem;
+	background-color: var(--sl-color-bg-nav);
+	color: var(--sl-color-text);
+	box-shadow: var(--sl-shadow-lg);
+}
+
+.asodhra-menu-panel:popover-open {
+	display: flex;
+	gap: 0.75rem;
+	align-items: center;
+}
+
+/* Social icons, then a divider, then the theme selector, as in the desktop header. */
+.asodhra-menu-socials {
+	display: flex;
+	align-items: center;
+	padding-inline-end: 0.5rem;
+	border-inline-end: 1px solid var(--sl-color-gray-5);
+}
+
+/* Each icon is a 44px tap target. */
+.asodhra-menu-socials a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	margin: 0;
+	padding: 0;
+}
+
+@media (min-width: 50rem) {
+	header.header,
+	:root[data-has-sidebar] header.header {
+		padding-inline-end: var(--sl-nav-pad-x);
+	}
+
+	.asodhra-menu {
+		display: none;
+	}
+}
+
 /* Ornaments */
 
 /* Scene breaks (--- in Markdown) become three stars, as does <hr class="asodhra-stars">. */
@@ -300,6 +434,83 @@ main:has(.asodhra-backdrop) {
 
 .asodhra-toc a:hover {
 	color: var(--sl-color-text-accent);
+}
+
+/* Site footer: section and social links in two columns, then the copyright notice */
+
+.asodhra-footer {
+	margin-top: 4rem;
+	padding-bottom: 1rem;
+	text-align: center;
+}
+
+.asodhra-footer hr.asodhra-stars {
+	margin: 0 auto 2.5rem;
+}
+
+.asodhra-footer-columns {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 12rem));
+	gap: 1.5rem;
+	justify-content: center;
+}
+
+.asodhra-footer h2 {
+	margin: 0 0 0.75rem;
+	font-size: var(--sl-text-xs);
+	font-weight: 600;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--asodhra-ornament);
+}
+
+.asodhra-footer ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+/* Each link is at least 44px tall, so it's easy to tap on a phone. */
+.asodhra-footer li a {
+	display: inline-flex;
+	gap: 0.5rem;
+	align-items: center;
+	min-height: 2.75rem;
+	font-family: var(--asodhra-font-display);
+	font-size: var(--sl-text-sm);
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-decoration: none;
+	color: var(--sl-color-gray-2);
+}
+
+.asodhra-footer li a:hover {
+	color: var(--sl-color-text-accent);
+}
+
+.asodhra-footer-legal {
+	max-width: 36rem;
+	margin: 2.5rem auto 0;
+	padding-top: 1.5rem;
+	border-top: 1px solid var(--sl-color-hairline);
+	font-size: var(--sl-text-xs);
+	line-height: 1.6;
+	color: var(--sl-color-gray-3);
+}
+
+.asodhra-footer-legal p {
+	margin: 0;
+}
+
+.asodhra-footer-legal p + p {
+	margin-top: 0.75rem;
+}
+
+/* The narrowest phones stack the two columns. */
+@media (max-width: 20rem) {
+	.asodhra-footer-columns {
+		grid-template-columns: minmax(0, 1fr);
+	}
 }
 
 /* Home page */
@@ -570,10 +781,30 @@ main:has(.asodhra-home) {
 
 /* What sets Asodhra apart */
 
+/*
+ * The cards wrap into rows of up to three, at least 16rem wide. A row that
+ * isn't full is centered: with two cards per row, the third sits centered
+ * beneath them at the same width, rather than at the left.
+ */
 .asodhra-hooks {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 	gap: 1.5rem;
+	container-type: inline-size;
+}
+
+.asodhra-hook {
+	flex: 1 1 16rem;
+	/* No wider than half a row, so a card alone on its row keeps its width. */
+	max-width: calc((100% - 1.5rem) / 2);
+}
+
+/* Too narrow for two cards side by side: one card per row, full width. */
+@container (width < 33.5rem) {
+	.asodhra-hook {
+		max-width: none;
+	}
 }
 
 .asodhra-hook {

@@ -1,1 +1,34 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#140b0a"/><path fill="#e9c27a" d="M16 3C16.9 11.1 20.9 15.1 29 16 20.9 16.9 16.9 20.9 16 29 15.1 20.9 11.1 16.9 3 16 11.1 15.1 15.1 11.1 16 3Z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+	<!-- The solar pearl of the Sorkarian Arbiters: a glowing golden orb with a
+	     pearl's sheen, swirled gold and ivory, on a night tile. The PNG and ICO
+	     fallbacks are made from this file by `npm run favicons`. -->
+	<defs>
+		<radialGradient id="glow" cx="16" cy="16" r="15.5" gradientUnits="userSpaceOnUse">
+			<stop offset="0.45" stop-color="#f3c96b" stop-opacity="0.7" />
+			<stop offset="0.7" stop-color="#d98f2b" stop-opacity="0.28" />
+			<stop offset="1" stop-color="#d98f2b" stop-opacity="0" />
+		</radialGradient>
+		<radialGradient id="pearl" cx="13.2" cy="12.4" r="12.6" fx="12.2" fy="11.2" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="#fffaf0" />
+			<stop offset="0.28" stop-color="#f8e6b8" />
+			<stop offset="0.6" stop-color="#e6b85e" />
+			<stop offset="0.85" stop-color="#b8802c" />
+			<stop offset="1" stop-color="#7c4b15" />
+		</radialGradient>
+		<clipPath id="orb">
+			<circle cx="16" cy="16" r="9.5" />
+		</clipPath>
+	</defs>
+	<rect width="32" height="32" rx="6" fill="#140b0a" />
+	<circle cx="16" cy="16" r="15.5" fill="url(#glow)" />
+	<circle cx="16" cy="16" r="9.5" fill="url(#pearl)" />
+	<!-- Swirls of ivory and deep gold across the surface. -->
+	<g clip-path="url(#orb)" fill="none" stroke-linecap="round">
+		<path d="M9.5 21.5C7.5 17 10.5 13 14.5 14S18 19.5 21.5 18 25 11.5 21 8.5" stroke="#fff4d6" stroke-opacity="0.6" stroke-width="1.6" />
+		<path d="M12 25C9.5 22 12.5 18.5 15.5 20S20.5 23.5 24 20.5" stroke="#8f5a17" stroke-opacity="0.45" stroke-width="1.2" />
+		<path d="M17.5 9C20 9.5 21.5 12 20 14" stroke="#8f5a17" stroke-opacity="0.35" stroke-width="0.9" />
+	</g>
+	<!-- A pearl's sheen, and a thin bright rim where the glow meets the edge. -->
+	<ellipse cx="12.6" cy="11.6" rx="2.6" ry="1.6" transform="rotate(-35 12.6 11.6)" fill="#fffdf7" fill-opacity="0.85" />
+	<circle cx="16" cy="16" r="9.25" fill="none" stroke="#ffe3a0" stroke-opacity="0.35" stroke-width="0.5" />
+</svg>

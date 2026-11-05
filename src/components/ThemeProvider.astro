@@ -1,0 +1,15 @@
+---
+// First-time visitors start in dark mode (the Crimson Isles) instead of
+// following their device. Starlight saves the theme choice in localStorage:
+// "dark" or "light", or an empty string for Auto. A browser that has never
+// saved one gets "dark" before Starlight's own script reads it, so the selector
+// shows Dark, and a visitor who later picks Auto keeps Auto.
+import Default from '@astrojs/starlight/components/ThemeProvider.astro';
+---
+
+<script is:inline>
+	try {
+		if (localStorage.getItem('starlight-theme') === null) localStorage.setItem('starlight-theme', 'dark');
+	} catch {}
+</script>
+<Default />
